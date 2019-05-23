@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+
+<!-- 
+    This is a client that will display a list of grocceries accessed from a REST API. 
+    
+-->
     <head>
         <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,6 +24,7 @@
                    
                     <del v-if="groccery.done"> {{groccery.name}}</del>
                     <span v-else> {{groccery.name}}</span>
+                    
                    
                <button class= "list-buton" v-on:click="removeTodo(groccery.id)">X</button>
 
@@ -26,10 +32,11 @@
           </ul>
 
           <div id="addGroccery">
-              <form>    
+ 
                     <input type="text" class="groccery-input" placeholder="Groccery name..." v-on:keyup.enter="addTodo">
-              </form>
-                
+
+              <!--  <List></List>-->
+                <p>{{groccerys}}</p>
           </div>
         </div>
     </body>
