@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!--DEVELOPMENT VERSON^^^^^^^-->
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+        <!--PRODUCTION VERSION^^^^^^^-->
+        <script src="main.js" type="module"></script>
+
+    </head>
+
+    <body>
+        <div id='App'> 
+
+          <ul id=" list">
+            <li v-for="groccery in groccerys" v-bind:key="groccery.id">
+                    <input type="checkbox" class="groccery-checkbox" v-on:click="check(groccery)" v-model="groccery.done">
+                   
+                    <del v-if="groccery.done"> {{groccery.name}}</del>
+                    <span v-else> {{groccery.name}}</span>
+                   
+               <button class= "list-buton" v-on:click="removeTodo(groccery.id)">X</button>
+
+            </li>
+          </ul>
+
+          <div id="addGroccery">
+              <form>    
+                    <input type="text" class="groccery-input" placeholder="Groccery name..." v-on:keyup.enter="addTodo">
+              </form>
+                
+          </div>
+        </div>
+    </body>
+</html>
