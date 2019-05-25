@@ -23,8 +23,8 @@
             <li v-for="groccery in groccerys" v-bind:key="groccery.id">
                     <input type="checkbox" class="groccery-checkbox" v-on:click="check(groccery)" v-model="groccery.done">
                    
-                    <del v-if="groccery.done"> {{groccery.name}}</del>
-                    <span v-else> {{groccery.name}}</span>
+                    <del v-on:click="check(groccery)" v-if="groccery.done"> {{groccery.name}}</del>
+                    <span v-on:click="check(groccery)" v-else> {{groccery.name}}</span>
                     
                    
                <button class= "list-buton" v-on:click="removeTodo(groccery.id)">X</button>
