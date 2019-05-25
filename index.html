@@ -17,6 +17,7 @@
 
     <body>
         <div id='App'> 
+          <p id="errorText"style=" color:red">{{error}}</p>
 
           <ul id=" list">
             <li v-for="groccery in groccerys" v-bind:key="groccery.id">
@@ -34,9 +35,9 @@
           <div id="addGroccery">
  
                     <input type="text" class="groccery-input" placeholder="Groccery name..." v-on:keyup.enter="addTodo">
-
+            
               <!--  <List></List>-->
-                <p>{{groccerys}}</p>
+                <!--<p>{{groccerys}}</p>-->
           </div>
         </div>
     </body>

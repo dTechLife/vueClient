@@ -11,11 +11,12 @@ var app = new Vue({
     data:{
           groccerys:[
                 //we want to fetch this object from a database
-            {
-                  id:"1", name:"bannanas", quantity:"Quantity", unit:"grams", done:false
-            }
+            {    id:"1", name:"bannanas", quantity:"Quantity", unit:"grams", done:false},
+            {    id:"2", name:"bannanas", quantity:"Quantity", unit:"grams", done:false}
             
-      ]},
+            ],
+            error:""  
+      },
 
       methods:{
             addTodo(event){     
@@ -29,22 +30,25 @@ var app = new Vue({
                         yield:0,
                         yieldUnit:"lbs",
                         servingCalories:100})
+
                   .then (function(response){
                         console.log(response);})
                   .catch(function(error){
-                        console.log(error);
+                        this.error = error;
                   })
                   event.target.value = ''
             },
 
             removeTodo(id){
-                  this.groccerys = this.groccerys.filter(function(groccerys){return groccerys.id !== id})  // this is a list function, it's made to run on lists.    
+                  this.groccerys = this.groccerys.filter(groccerys => groccerys.id !== id)  // this is a list function, it's made to run on lists.    
                   axios 
-                      .delete(apiURL) 
+                        .delete(apiURL+"/api/groccerylists/"+id) 
+                        .catch(error=> this.error = error)
             },
             
             check(groccery){
                   groccery.done = !groccery.done
+                  
             }
 
       },
@@ -52,6 +56,7 @@ var app = new Vue({
             axios
                   .get(apiURL+'/api/groccerylists')
                   .then(function(response){ app.groccerys = response.data, console.log(response)})
+                  .catch(error => this.error = error)
                   
       }
 })
