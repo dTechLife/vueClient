@@ -10,25 +10,27 @@ var app = new Vue({
     el: '#App',
     data:{
           groccerys:[
-                //we want to fetch this object from a database
-            {    id:"1", name:"bannanas", quantity:"Quantity", unit:"grams", done:false},
-            {    id:"2", name:"bannanas", quantity:"Quantity", unit:"grams", done:false}
-            
+                {}
             ],
+
             error:""  
+      
       },
 
       methods:{
             addTodo(event){     
-                
+
                   const name = event.target.value //sets the const name to value from the event that fired the function
-                  this.groccerys.push({name, done:false, id:Date.now()})
+                  //this.groccerys.push({name, done:false, id:Date.now()})
+                  
+
                   axios
                   .post(apiURL+'/api/groccerylists',{
                         name:name,
                         ingredients:{"potatoes":1},
                         yield:0,
                         yieldUnit:"lbs",
+                        done: false,
                         servingCalories:100})
 
                   .then (function(response){
@@ -36,10 +38,12 @@ var app = new Vue({
                   .catch(function(error){
                         this.error = error;
                   })
+                  this.getList();
                   event.target.value = ''
             },
 
             removeTodo(id){
+
                   this.groccerys = this.groccerys.filter(groccerys => groccerys.id !== id)  // this is a list function, it's made to run on lists.    
                   axios 
                         .delete(apiURL+"/api/groccerylists/"+id) 
@@ -47,19 +51,37 @@ var app = new Vue({
             },
             
             check(groccery){
+
                   groccery.done = !groccery.done
-                  
+                  this.updateList(groccery)
+                  axios
+                        .patch(apiURL +'/api/groccerylists/'+groccery.id, {done : groccery.done})
+                        .then(error => console.log(error))
+                        .then(response => app.groccerys = response.data)
+                        .catch(error => this.error = error.response)
+            },
+
+            updateList(groccery){
+
+                  console.log(groccery)
+                
+
+            },
+            getList(){
+                  axios
+                  .get(apiURL+'/api/groccerylists')
+                  .then(function(response){ app.groccerys = response.data})
+                  .catch(error => this.error = error)
             }
 
       },
       mounted(){
-            axios
-                  .get(apiURL+'/api/groccerylists')
-                  .then(function(response){ app.groccerys = response.data, console.log(response)})
-                  .catch(error => this.error = error)
+      
+            this.getList()
                   
       }
 })
+
 
       // [
       // {
