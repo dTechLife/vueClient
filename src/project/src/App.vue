@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div>
+      <router-view/> <!-- this element is necessary to route our application! -->
+
+    </div>
 </template>
 
 <script>
