@@ -20,8 +20,7 @@ export default {
             {url:"/#/shoppingList", name:'Shopping List'},
             {url:'/#/calendar', name:'Meal Planner'},
             {url:'/#/cookbook', name:'CookBook'}
-            // {link:'', name:''}
-                    
+            // {link:'', name:''}       
         ]}
     },
   methods: {
