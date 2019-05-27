@@ -27,7 +27,7 @@
 <script>
 import axios from 'axios'
 
-let apiURL = 'http://localhost:3000'
+let apiURL = 'http://172.16.1.86:3000'
 
 export default {
   data: function () {
