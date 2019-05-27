@@ -1,7 +1,8 @@
 
 <template>
   <div id="cookbook">
-      <p>{{msg}}</p>
+      <p>{{$store.state.count}}</p>
+       <input type="text" v-model="$store.state.count">
   </div>
 </template>
 

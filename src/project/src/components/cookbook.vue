@@ -25,7 +25,7 @@
 import axios from 'axios'
 
 let apiURL = 'http://172.16.1.86:3000'
-const apiURI = '/api/groccerylists/'
+const apiURI = '/api/recipes/'
 
 export default {
   data: function () {
