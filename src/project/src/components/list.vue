@@ -104,6 +104,7 @@ h2 {
 ul {
   list-style-type: none;
   padding: 0;
+  word-break: break-all
 }
 li {
   margin: 0 10px;
