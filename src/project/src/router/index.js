@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import list from '@/components/list'
+import shoppinglist from '@/components/shoppinglist'
 import home from '@/components/home'
 import cookbook from '@/components/cookbook'
 import calendar from '@/components/calendar'
@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/shoppingList',
-      name: 'list',
-      component: list
+      name: 'shoppinglist',
+      component: shoppinglist
     },
     {
       path: '/',
