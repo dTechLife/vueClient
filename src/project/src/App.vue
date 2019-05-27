@@ -1,13 +1,17 @@
 <template>
     <div>
+      <navbar/>
       <router-view/> <!-- this element is necessary to route our application! -->
-
     </div>
 </template>
 
 <script>
+import navbar from './components/navbar'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'navbar': navbar
+  }
 }
 </script>
 
