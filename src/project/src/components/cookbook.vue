@@ -3,14 +3,14 @@
     <p id="errorText" style="color:red">{{error}}</p>
      <!-- list Items in the cookbook object and allow them to edited, needs refactoring in to components-->
     <ul id="list">
-      <li class="listItem" v-for="recipe in recipes" v-bind:key="recipe.id">
+      <li class="listItem" v-for="recipe in this.recipes" v-bind:key="recipe.id">
         <input type="checkbox" class="recipe-checkbox" v-on:click="check(recipe)" v-model="recipe.done">
         <del v-on:click="check(recipe)" v-if="recipe.done">{{recipe.name}}</del>
         <span v-on:click="check(recipe)" v-else>{{recipe.name}}</span>
         <br/>
-        <label>Yield(servings)</label><input type="text" v-on:keyup.enter="updateList(recipe)" v-model="recipe.yield"><br/>
-        <label>Yield Unit</label><input type="text" v-on:keyup.enter="updateList(recipe)" v-model="recipe.yieldUnit"><br/>
-        <label>Calories per serving</label><input type="text" v-on:keyup.enter="updateList(recipe)" v-model="recipe.servingCalories"><br/>
+        <label>Yield(servings)</label><input type="text" v-on:keyup.enter="setRecipe(recipe)" v-model="recipe.yield"><br/>
+        <label>Yield Unit</label><input type="text" v-on:keyup.enter="setRecipe(recipe)" v-model="recipe.yieldUnit"><br/>
+        <label>Calories per serving</label><input type="text" v-on:keyup.enter="setRecipe(recipe)" v-model="recipe.servingCalories"><br/>
         <button class="list-buton" v-on:click="removeTodo(recipe.id)">X</button><br/>
       </li>
     </ul>
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 let apiURL = 'http://172.16.1.86:3000'
 const apiURI = '/api/recipes/'
@@ -30,10 +31,12 @@ const apiURI = '/api/recipes/'
 export default {
   data: function () {
     return {
-      recipes: [{}],
       error: ''
     }
   },
+  computed: mapState({
+    recipes: state => state.recipes
+  }),
   methods: {
     addTodo (event) {
       this.newTodo(event)
@@ -50,13 +53,13 @@ export default {
       recipes.done = !recipes.done
       this.updateList(recipes)
     },
-    updateList (recipes) {
-      axios
-        .post(apiURL + apiURI + recipes.id + '/replace', recipes)
-        .then((error) => console.log(error))
-        .then((response) => { this.recipes = response.data })
-        .catch((error) => { this.error = error.response })
-    },
+    // updateList (recipes) {
+    //   axios
+    //     .post(apiURL + apiURI + recipes.id + '/replace', recipes)
+    //     .then((error) => console.log(error))
+    //     .then((response) => { this.recipes = response.data })
+    //     .catch((error) => { this.error = error.response })
+    // },
     getList () {
       axios
         .get(apiURL + apiURI)
